@@ -45,6 +45,9 @@ class LoginScreen extends StatelessWidget {
                   height: 10,
                 ),
                 TextFieldCustom(
+                  onChanged: (value) {
+                    controller.userModel.value.email = value;
+                  },
                   label: 'Email Address',
                   hintText: 'Enter your email address',
                 ),
@@ -53,6 +56,9 @@ class LoginScreen extends StatelessWidget {
                 ),
                 Obx(
                   () => TextFieldCustom(
+                    onChanged: (value){
+                      controller.userModel.value.password = value;
+                    },
                     label: 'Password',
                     hintText: 'Enter your Password',
                     isSequred: controller.isSequred.value,
@@ -72,6 +78,9 @@ class LoginScreen extends StatelessWidget {
                   height: 30,
                 ),
                 CustomButton(
+                  onTap: () {
+                    print('Login onTap');
+                  },
                   label: 'Log In',
                 ),
                 SizedBox(
@@ -79,7 +88,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 TextButton(
                     onPressed: () {
-                      Get.to(()=> RegisterScreen());
+                      Get.to(() => RegisterScreen());
                     },
                     child: Text(
                       'CREATE AN ACCOUNT',
