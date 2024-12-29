@@ -134,6 +134,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 30,
                 ),
                 CustomButton(
+                  onTap: ()=> controller.registration(),
                   label: 'Sign Up',
                 ),
                 SizedBox(
