@@ -60,7 +60,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           shape: BoxShape.circle,
                           color: AppColor.primary),
                       child: Icon(
-                        controller.selectedImage.value.path == '' ? Icons.add : null,
+                        controller.selectedImage.value.path == ''
+                            ? Icons.add
+                            : null,
                         color: Colors.white,
                         size: 50,
                       ),
@@ -133,9 +135,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(
                   height: 30,
                 ),
-                CustomButton(
-                  onTap: ()=> controller.registration(),
-                  label: 'Sign Up',
+                Obx(
+                  () => CustomButton(
+                    onTap: () => controller.registration(),
+                    label: controller.isLoading.value ? 'Loading' : 'Sign Up',
+                  ),
                 ),
                 SizedBox(
                   height: 15,

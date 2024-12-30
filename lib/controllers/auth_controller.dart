@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:talknest/core/services/api_service.dart';
+import 'package:talknest/core/services/shared_services.dart';
 import 'package:talknest/models/user_model.dart';
+import 'package:talknest/view/home/home_screen.dart';
 
 class AuthController extends GetxController {
   RxBool isSequred = RxBool(true);
@@ -34,11 +37,20 @@ class AuthController extends GetxController {
     isLoading.value = true;
 
     final response = await ApiServices.register(userModel.value);
-    print(await response.stream.bytesToString());
+    // print(await response.stream.bytesToString());
 
     isLoading.value = false;
 
     update();
+    
+    if(response.statusCode != 200){
+      Get.snackbar('Error',response.reasonPhrase!);
+    }
+    final decode = jsonDecode(await response.stream.bytesToString());
+
+    await SharedServices.setData(SetType.string, 'token', decode['token']);
+
+    Get.offAll(()=> HomeScreen());
 
   }
 }
