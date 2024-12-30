@@ -56,7 +56,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 Obx(
                   () => TextFieldCustom(
-                    onChanged: (value){
+                    onChanged: (value) {
                       controller.userModel.value.password = value;
                     },
                     label: 'Password',
@@ -77,11 +77,11 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(
                   height: 30,
                 ),
-                CustomButton(
-                  onTap: () {
-                    print('Login onTap');
-                  },
-                  label: 'Log In',
+                Obx(
+                  () => CustomButton(
+                    onTap: () => controller.login(),
+                    label: controller.isLoading.value ? 'Loading...' : 'Log In',
+                  ),
                 ),
                 SizedBox(
                   height: 15,
